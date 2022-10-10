@@ -16,9 +16,7 @@ export const AuthProvider = ({children}) =>{
     const [auth, setAuth] = useState(initialState);
     const {dispatch} = useContext(ChatContext)
     const login = async(email,password)=>{
-       
         const resp = await fetchSinToken('login',{email,password},'POST');
-
         if (resp.ok){
             localStorage.setItem('token',resp.token);
             setAuth({
@@ -28,16 +26,11 @@ export const AuthProvider = ({children}) =>{
                 name:resp.nombre,
                 email:resp.email
             })
-        
             return true;
-        
         }   
-
         return resp.msg;
-
     };
     const register = async(nombre,email,password)=>{
-
         const resp = await fetchSinToken('login/new',{nombre,email,password},'POST');
         if (resp.ok){
             localStorage.setItem('token',resp.token);
@@ -51,12 +44,9 @@ export const AuthProvider = ({children}) =>{
             return true;
         }   
         return resp.msg;
-
     };
-    const verificaToken = useCallback( async ()=>{
-        
+    const verificaToken = useCallback( async () => {
         const token = localStorage.getItem('token');
-
         if(!token){
            setAuth({
                 uid:null,
@@ -68,7 +58,6 @@ export const AuthProvider = ({children}) =>{
             return false;
         }
         const resp = await fetchConToken('login/renew');
-    
         if (resp.ok){
             localStorage.setItem('token',resp.token);
             setAuth({
@@ -89,9 +78,6 @@ export const AuthProvider = ({children}) =>{
             })
             return false;
         }   
-  
-        
-        
     },[]); 
     const logout = () =>{
         localStorage.removeItem('token');

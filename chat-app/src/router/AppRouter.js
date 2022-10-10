@@ -29,9 +29,8 @@ export const AppRouter = () => {
                 <Switch>
                     {/* <Route path="/auth" component={AuthRouter}/> */}
                     <PublicRoute isAuthenticated={auth.logged} path="/auth" component={AuthRouter}/>             
-                    <PrivateRoute isAuthenticated={auth.logged}  path="/" component={ChatPage}/>
+                    <PrivateRoute isAuthenticated={auth.logged} path="/"component={ChatPage}/>
                     <Redirect to="/"/>     
-                 
                 </Switch>
             </div>
         </Router>

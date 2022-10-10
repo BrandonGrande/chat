@@ -5,20 +5,13 @@ import {
   } from 'react-router-dom';
   
   
-export const PublicRoute = ({
-    isAuthenticated,
-    component:Component,
-    ...rest 
-}) => {
-
+export const PublicRoute = ({ isAuthenticated, component:Component }) => {
     return (
-        <Route {...rest} 
-            component={(props) =>{
+        <Route component={(props) =>{
+                console.log(isAuthenticated);
+                console.log(props); 
                 return(!isAuthenticated) 
                 ? <Component {...props}/>
                 : <Redirect to="/"/>
-
-}}
-        />
-    )
-}
+            }}/>)    
+    }

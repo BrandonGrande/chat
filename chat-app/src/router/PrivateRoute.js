@@ -4,21 +4,18 @@ import {
     Redirect
   } from 'react-router-dom';
   
-  
 export const PrivateRoute = ({
     isAuthenticated,
-    component:Component,
-    ...rest 
+    component:Component
 }) => {
-
-    return (
- 
-        <Route {...rest}
+    return (        
+        <Route 
             component={(props) =>{
+                console.log('llego');
+                console.log(props);
                 return(isAuthenticated) ? <Component {...props}/>
                 : <Redirect to="/auth"/>
-
-}}
+            }}
         />
     )
 }

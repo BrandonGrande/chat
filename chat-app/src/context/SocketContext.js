@@ -12,13 +12,12 @@ export const SocketProvider = ({ children }) => {
 
     const { socket, online, conectarSocket,desconectarSocket } = useSocket('http://localhost:8080');
     const {auth} = useContext(AuthContext);
-    const {dispatch} = useContext(ChatContext)
-    
+    const {chatState,dispatch} = useContext(ChatContext);
+
     useEffect(() => {
         if(auth.logged){
             conectarSocket();
         }
-      
     }, [auth,conectarSocket]);
 
 
@@ -46,10 +45,7 @@ export const SocketProvider = ({ children }) => {
                 type:types.nuevoMensaje,
                 payload:mensaje
             });
-
             scrollToBottomAnimated('mensajes');
-            
-
         });
          
     }, [socket,dispatch])
